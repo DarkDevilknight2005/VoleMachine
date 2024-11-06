@@ -3,4 +3,6 @@ project(VoleMachine)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(VoleMachine main.cpp)
+add_executable(VoleMachine main.cpp
+        lib/vole_machine.cpp
+        lib/vole_machine.h)
