@@ -15,8 +15,8 @@
 // a toupper overload for string
 // Capitalize characters in the given string
 string &toupper(string &s) {
-    for (char &i : s) {
-        i = (char)toupper(i);
+    for (char &i: s) {
+        i = (char) toupper(i);
     }
     return s;
 }
@@ -26,7 +26,7 @@ bool is_hex(string &s) {
     // first capitalize
     s = toupper(s);
     // loop for every character
-    for (char &i : s) {
+    for (char &i: s) {
         // check if the character is within the specified range, if not return false
         if (!(('0' <= i && i <= '9') || ('A' <= i && i <= 'F')))
             return false;
@@ -99,14 +99,23 @@ unsigned char float_fix(unsigned char f) {
     return f;
 }
 
-Register::Register()                : value(0) {} // initial value 0
+Register::Register() : value(0) {} // initial value 0
 Register::Register(unsigned char v) : value(v) {}
-unsigned char Register::get_value() const           { return value; }
-void Register::set_value(unsigned char &ch)         { value = ch; }
-Register &Register::operator=(unsigned char ch)     { value = ch; return *this; }
-bool Register::operator==(unsigned char ch) const   { return value == ch; }
-bool Register::operator==(int ch) const             { return value == ch; }
-bool Register::operator==(const Register &r) const  { return value == r.value; }
+
+unsigned char Register::get_value() const { return value; }
+
+void Register::set_value(unsigned char &ch) { value = ch; }
+
+Register &Register::operator=(unsigned char ch) {
+    value = ch;
+    return *this;
+}
+
+bool Register::operator==(unsigned char ch) const { return value == ch; }
+
+bool Register::operator==(int ch) const { return value == ch; }
+
+bool Register::operator==(const Register &r) const { return value == r.value; }
 
 // Access to memory part
 Register &Memory::operator[](string &XY) {
@@ -119,7 +128,7 @@ Register &Memory::operator[](unsigned char pos) { return part[pos]; }
 // sets memory, registers and output to 0
 void VM::wipe() {
     memory = {};
-    for (auto &i : registers) {
+    for (auto &i: registers) {
         i = 0;
     }
     hex_output = "";
@@ -179,7 +188,7 @@ unsigned char VM::add(unsigned char S, unsigned char T, bool is_float) {
         if ((first_number & 0b0'111'0000) > (second_number & 0b0'111'0000)) {
             // shift Mantissa to right by the difference of Exponents
             unsigned char temp_man = second_number & 0b0'000'1111;
-            temp_man >>= ((first_number & 0b0'111'0000) - (first_number & 0b0'111'0000) ) >> 4;
+            temp_man >>= ((first_number & 0b0'111'0000) - (first_number & 0b0'111'0000)) >> 4;
 
             // assemble new value
             second_number &= 0b1'000'0000;
@@ -188,7 +197,7 @@ unsigned char VM::add(unsigned char S, unsigned char T, bool is_float) {
         } else {
             // shift Mantissa to right by the difference of Exponents
             unsigned char temp_man = first_number & 0b0'000'1111;
-            temp_man >>= ((first_number & 0b0'111'0000) - (first_number & 0b0'111'0000) ) >> 4;
+            temp_man >>= ((first_number & 0b0'111'0000) - (first_number & 0b0'111'0000)) >> 4;
 
             // assemble new value
             first_number &= 0b1'000'0000;
@@ -260,7 +269,7 @@ unsigned char VM::rotate(unsigned char R, unsigned char X) {
 
 // If it satisfies the condition, change PC
 void VM::jump2(unsigned char R, string XY) {
-    if ((char)registers[R].get_value() > (char)registers[0].get_value()) {
+    if ((char) registers[R].get_value() > (char) registers[0].get_value()) {
         PC = hex_to_dec(XY) - 1;
     }
 }
@@ -268,7 +277,7 @@ void VM::jump2(unsigned char R, string XY) {
 // Main Vole Machine's program
 void VM::operate(bool _steps) {
     // If there is no loaded file
-    if (!is_loaded()){
+    if (!is_loaded()) {
         cout << "No file loaded";
         return;
     }
@@ -390,7 +399,7 @@ ostream &operator<<(ostream &o, const VM &vm) {
     }
     o << "\n\n";
     o << "Rs:";
-    for (auto reg : vm.registers) {
+    for (auto reg: vm.registers) {
         o << ' ' << decimal_to_hex(reg.get_value());
     }
     o << endl;
@@ -497,10 +506,10 @@ bool VM::read_and_validate_yes_no() {
 }
 
 enum class VM_UI::enMainMenuOption {
-  eLoadFile = 1,
-  eExecuteAsWhole,
-  eExecuteStepByStep,
-  Exit
+    eLoadFile = 1,
+    eExecuteAsWhole,
+    eExecuteStepByStep,
+    Exit
 };
 
 /**
@@ -511,38 +520,37 @@ enum class VM_UI::enMainMenuOption {
  * @return The valid user choice
  */
 short VM_UI::ReadUserChoice(const short &From, const short &To) {
-  short Choice = 0; // Variable to store the user's choice
-  string Input;     // Variable to store user input
-  do {
-    cout << "Choose what do you want to do [" << From << "-" << To << "] : ";
-    getline(cin, Input); // Read user input
+    short Choice = 0; // Variable to store the user's choice
+    string Input;     // Variable to store user input
+    do {
+        cout << "Choose what do you want to do [" << From << "-" << To << "] : ";
+        getline(cin, Input); // Read user input
 
-    // Check for empty input
-    if (Input.empty()) {
-      cout << "Empty input!" << endl;
-    }
-    // Validate that input consists only of digits
-    else if (all_of(Input.begin(), Input.end(),[](char c) { return isdigit(c); })) {
-      Choice = short(stoi(Input)); // Convert input to short
-    } else {
-      cout << "Invalid input, Enter a valid choice from [" << From << "-" << To
-           << "]" << endl; // Notify user of invalid input
-    }
+        // Check for empty input
+        if (Input.empty()) {
+            cout << "Empty input!" << endl;
+        }
+            // Validate that input consists only of digits
+        else if (all_of(Input.begin(), Input.end(), [](char c) { return isdigit(c); })) {
+            Choice = short(stoi(Input)); // Convert input to short
+        } else {
+            cout << "Invalid input, Enter a valid choice from [" << From << "-" << To
+                 << "]" << endl; // Notify user of invalid input
+        }
 
-  } while (Choice <= (From - 1) ||
-           Choice > To); // Repeat until a valid choice is made
-  return Choice; // Return the valid choice
+    } while (Choice <= (From - 1) || Choice > To); // Repeat until a valid choice is made
+    return Choice; // Return the valid choice
 }
 
 /**
  * Pauses the screen until the user presses a key.
  */
 void VM_UI::PauseScreen() {
-  cout.flush(); // Flush the output buffer
+    cout.flush(); // Flush the output buffer
 #if defined(__unix__) || defined(__linux__) || defined(__APPLE__)
-  system("read -n 1 -s"); // Unix-based systems
+    system("read -n 1 -s"); // Unix-based systems
 #else
-  system("PAUSE >nul"); // Windows systems
+    system("PAUSE >nul"); // Windows systems
 #endif
 }
 
@@ -551,9 +559,9 @@ void VM_UI::PauseScreen() {
  */
 void VM_UI::ClearScreen() {
 #if defined(__unix__) || defined(__linux__) || defined(__APPLE__)
-  system("clear"); // Clear screen for Unix-based systems
+    system("clear"); // Clear screen for Unix-based systems
 #else
-  system("CLS"); // Clear screen for Windows systems
+    system("CLS"); // Clear screen for Windows systems
 #endif
 }
 
@@ -563,57 +571,57 @@ void VM_UI::ClearScreen() {
  * @param MainMenuOption The selected menu option
  */
 void VM_UI::PerformMainMenuOption(const enMainMenuOption &MainMenuOption) {
-  switch (MainMenuOption) {
-  case enMainMenuOption::eLoadFile:
-    ClearScreen();
-    vole_machine.read_file();
-    break;
+    switch (MainMenuOption) {
+        case enMainMenuOption::eLoadFile:
+            ClearScreen();
+            vole_machine.read_file();
+            break;
 
-  case enMainMenuOption::eExecuteAsWhole:
-    ClearScreen();
-    vole_machine.operate(false);
-    break;
+        case enMainMenuOption::eExecuteAsWhole:
+            ClearScreen();
+            vole_machine.operate(false);
+            break;
 
-  case enMainMenuOption::eExecuteStepByStep:
-    ClearScreen();
-    vole_machine.operate(true);
-    break;
+        case enMainMenuOption::eExecuteStepByStep:
+            ClearScreen();
+            vole_machine.operate(true);
+            break;
 
-  case enMainMenuOption::Exit:
-    isRunning = false;
-    ClearScreen();
-    cout << "\nProgram Ends :-)" << endl;
-    break;
+        case enMainMenuOption::Exit:
+            isRunning = false;
+            ClearScreen();
+            cout << "\nProgram Ends :-)" << endl;
+            break;
 
-  default:
-    cout << "\nInvalid operation selected" << endl;
-    break;
-  }
-  if (isRunning) {
-    cout << "\n\nPress any key to go back to main menu... ";
-    PauseScreen(); // Pause the screen after each option's execution
-    ClearScreen(); // Clear the screen after pausing
-  }
+        default:
+            cout << "\nInvalid operation selected" << endl;
+            break;
+    }
+    if (isRunning) {
+        cout << "\n\nPress any key to go back to main menu... ";
+        PauseScreen(); // Pause the screen after each option's execution
+        ClearScreen(); // Clear the screen after pausing
+    }
 }
 
 /**
  * Displays the main menu with options for the user to select from.
  */
 void VM_UI::ShowMainMenu() {
-  ClearScreen();
-  isRunning = true;
-  vole_machine.delete_file();
-  while (isRunning) {
-    cout << "______________________________________________\n";
-    cout << "\t\t" << "Main Menu\n";
-    cout << "______________________________________________\n";
-    cout << "\t" << "[1] Load file.\n";
-    cout << "\t" << "[2] Execute program as a whole.\n";
-    cout << "\t" << "[3] Execute program step by step.\n";
-    cout << "\t" << "[4] Exit.\n";
-    cout << "______________________________________________\n";
+    ClearScreen();
+    isRunning = true;
+    vole_machine.delete_file();
+    while (isRunning) {
+        cout << "______________________________________________\n";
+        cout << "\t\t" << "Main Menu\n";
+        cout << "______________________________________________\n";
+        cout << "\t" << "[1] Load file.\n";
+        cout << "\t" << "[2] Execute program as a whole.\n";
+        cout << "\t" << "[3] Execute program step by step.\n";
+        cout << "\t" << "[4] Exit.\n";
+        cout << "______________________________________________\n";
 
-    enMainMenuOption choice = static_cast<enMainMenuOption>(ReadUserChoice(1, 4));
-    PerformMainMenuOption(choice);
-  }
+        enMainMenuOption choice = static_cast<enMainMenuOption>(ReadUserChoice(1, 4));
+        PerformMainMenuOption(choice);
+    }
 }
