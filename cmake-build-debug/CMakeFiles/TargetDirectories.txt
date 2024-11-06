@@ -1,0 +1,3 @@
+C:/Users/Mahmoud/CLionProjects/VoleMachine/cmake-build-debug/CMakeFiles/VoleMachine.dir
+C:/Users/Mahmoud/CLionProjects/VoleMachine/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Mahmoud/CLionProjects/VoleMachine/cmake-build-debug/CMakeFiles/rebuild_cache.dir
