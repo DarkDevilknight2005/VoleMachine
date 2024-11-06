@@ -1,6 +1,3 @@
-#ifndef VOLEMACHINE_VOLE_MACHINE_H
-#define VOLEMACHINE_VOLE_MACHINE_H
-
 // File: A1-Task4-S17-20230367_20230631_20230387.cpp
 // Purpose: Simulate Vole Machine with its all commands in cpp
 // Authors: Mahmoud Ibraheem Mohamed Mohamed
@@ -13,10 +10,13 @@
 // TA: Hussien Tarek
 // Date: 2/11/2024
 
-#include <algorithm>
-#include <cmath>
-#include <fstream>
+#ifndef VOLEMACHINE_VOLE_MACHINE_H
+#define VOLEMACHINE_VOLE_MACHINE_H
+
 #include <iostream>
+#include <fstream>
+#include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -38,75 +38,59 @@ unsigned char float_fix(unsigned char f);
 
 class Register {
 private:
-  unsigned char value;
-
+    unsigned char value;
 public:
-  // Assignments
-  Register(); // initial value 0
-  Register(unsigned char v);
-  unsigned char get_value() const;
-  void set_value(unsigned char &ch);
-  Register &operator=(unsigned char ch);
-  bool operator==(unsigned char ch) const;
-  bool operator==(int ch) const;
-  bool operator==(const Register &r) const;
+    // Assignments
+    Register(); // initial value 0
+    Register(unsigned char v);
+    unsigned char get_value() const;
+    void set_value(unsigned char &ch);
+    Register &operator=(unsigned char ch);
+    bool operator==(unsigned char ch) const;
+    bool operator==(int ch) const;
+    bool operator==(const Register &r) const;
 };
 
 class Memory {
 public:
-  Register part[256];
-  // Access modifiers
-  Register &operator[](string &XY);
-  Register &operator[](unsigned char pos);
+    Register part[256];
+    // Access modifiers
+    Register &operator[](string &XY);
+    Register &operator[](unsigned char pos);
 };
 
 class VM {
 private:
-  // R, S, T are the position of registers
-  // XY is the position of memory
-  Register registers[16];
-  Memory memory;
-  Memory file;
-  unsigned char file_PC = 0x10;
-  unsigned char PC = 0x10;
-  string hex_output;   // Contains a list with all inserted values in 00 pos in
-                       // memory in hex
-  string ascii_output; // Contains a list with all inserted values in 00 pos in
-                       // memory in ASCII
-  bool steps = false;
-  bool file_is_loaded = false;
-  void load1(unsigned char R, unsigned char XY); // Load from Memory XY
-  void load2(unsigned char R, unsigned char XY); // Load XY
-  void store(unsigned char R, unsigned char XY); // store register in XY
-  void move(unsigned char R,
-            unsigned char
-                S); // copy value from the first register to the second register
-  unsigned char
-  add(unsigned char S, unsigned char T,
-      bool is_float); // add two registers as float or integer in 2's complement
-  void jump(unsigned char R, string XY); // if the given register is equal to
-                                         // register[0] hump to memory XY
-  unsigned char OR(unsigned char S,
-                   unsigned char T); // bitwise OR between two registers
-  unsigned char AND(unsigned char S,
-                    unsigned char T); // bitwise AND between two registers
-  unsigned char XOR(unsigned char S,
-                    unsigned char T); // bitwise XOP between two registers
-  unsigned char rotate(
-      unsigned char R,
-      unsigned char X); // rotates register's bits to right by the given number
-  void jump2(unsigned char R, string XY); // if the given register is greater
-                                          // than register[0] hump to memory XY
-  static bool read_and_validate_yes_no(); // [Y-N] input for steps
+    // R, S, T are the position of registers
+    // XY is the position of memory
+    Register registers[16];
+    Memory memory;
+    Memory file;
+    unsigned char file_PC = 0x10;
+    unsigned char PC = 0x10;
+    string hex_output;                              // Contains a list with all inserted values in 00 pos in memory in hex
+    string ascii_output;                            // Contains a list with all inserted values in 00 pos in memory in ASCII
+    bool steps = false;
+    bool file_is_loaded = false;
+    void load1(unsigned char R, unsigned char XY);  // Load from Memory XY
+    void load2(unsigned char R, unsigned char XY);  // Load XY
+    void store(unsigned char R, unsigned char XY);  // store register in XY
+    void move(unsigned char R, unsigned char S);    // copy value from the first register to the second register
+    unsigned char add(unsigned char S, unsigned char T, bool is_float); // add two registers as float or integer in 2's complement
+    void jump(unsigned char R, string XY);                 // if the given register is equal to register[0] hump to memory XY
+    unsigned char OR (unsigned char S, unsigned char T);   // bitwise OR between two registers
+    unsigned char AND(unsigned char S, unsigned char T);   // bitwise AND between two registers
+    unsigned char XOR(unsigned char S, unsigned char T);   // bitwise XOP between two registers
+    unsigned char rotate(unsigned char R, unsigned char X);// rotates register's bits to right by the given number
+    void jump2(unsigned char R, string XY);                // if the given register is greater than register[0] hump to memory XY
+    static bool read_and_validate_yes_no();                // [Y-N] input for steps
 public:
-  friend ostream &
-  operator<<(ostream &o,
-             const VM &vm); // operator overload to print Memory and registers
-  void wipe();              // The variables used in operate() are reset
-  void delete_file();       // Delete file
-  bool is_loaded() const { return file_is_loaded; }
-  void read_file();          // store instructions in memory if they're valid
-  void operate(bool _steps); // operate by steps or by whole
+    friend ostream &operator<<(ostream &o, const VM &vm);  // operator overload to print Memory and registers
+    void wipe();                                           // The variables used in operate() are reset
+    void delete_file();                                    // Delete file
+    bool is_loaded() const { return file_is_loaded; }
+    void read_file();                                      // store instructions in memory if they're valid
+    void operate(bool _steps);                             // operate by steps or by whole
 };
 
 class VM_UI {
@@ -116,11 +100,8 @@ private:
   enum class enMainMenuOption; // Contains options in a human-readable format
   // Function to perform the selected main menu option
   void PerformMainMenuOption(const enMainMenuOption &MainMenuOption);
-
 public:
-  static short ReadUserChoice(
-      const short &From,
-      const short &To); // Function to read user choice within a given range
+  static short ReadUserChoice(const short &From, const short &To); // Function to read user choice within a given range
   static void PauseScreen(); // Function to pause the screen
   static void ClearScreen(); // Function to clear the screen
   void ShowMainMenu();       // Function to display the main menu
