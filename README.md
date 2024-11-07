@@ -1,4 +1,5 @@
-![UML class (1)](https://github.com/user-attachments/assets/0004c9bd-668e-4b77-9841-8ae41ef5e889)# Vole Machine Simulator
+![UML class (1)](https://github.com/user-attachments/assets/0004c9bd-668e-4b77-9841-8ae41ef5e889)
+# Vole Machine Simulator
 
 ## Authors
 - Mahmoud Ibraheem Mohamed Mohamed
