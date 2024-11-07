@@ -14,15 +14,15 @@
 
 // a toupper overload for string
 // Capitalize characters in the given string
-string &toupper(string &s) {
+string &VM::toupper(string &s) {
     for (char &i: s) {
-        i = (char) toupper(i);
+        i = (char) std::toupper(i);
     }
     return s;
 }
 
 // Check if the string is in the form of Hexadecimal
-bool is_hex(string &s) {
+bool VM::is_hex(string &s) {
     // first capitalize
     s = toupper(s);
     // loop for every character
@@ -35,7 +35,7 @@ bool is_hex(string &s) {
 }
 
 // Convert hexadecimal to decimal number (Max is 255 for Vole Machine)
-unsigned char hex_to_dec(string hex) {
+unsigned char VM::hex_to_dec(string hex) {
     // initialize variable
     unsigned char dec = 0;
 
@@ -51,7 +51,7 @@ unsigned char hex_to_dec(string hex) {
 }
 
 // Convert decimal number to hexadecimal
-string decimal_to_hex(int decimal) {
+string VM::decimal_to_hex(int decimal) {
     // to return "00" instead of an empty string
     if (decimal == 0)
         return "00";
@@ -77,7 +77,7 @@ string decimal_to_hex(int decimal) {
 }
 
 // Converts to Non-implicit
-unsigned char float_fix(unsigned char f) {
+unsigned char VM::float_fix(unsigned char f) {
     // if Mantissa is empty, reset Exponent
     if ((f & 0b0'000'1111) == 0) {
         f &= 0b1'000'0000;
@@ -119,7 +119,7 @@ bool Register::operator==(const Register &r) const { return value == r.value; }
 
 // Access to memory part
 Register &Memory::operator[](string &XY) {
-    unsigned char pos = hex_to_dec(XY);
+    unsigned char pos = VM::hex_to_dec(XY);
     return part[pos];
 }
 
@@ -389,18 +389,18 @@ ostream &operator<<(ostream &o, const VM &vm) {
     o << "Memory:\n";
     o << "    00";
     for (unsigned char i = 1; i < 16; ++i) {
-        o << ' ' << decimal_to_hex(i);
+        o << ' ' << VM::decimal_to_hex(i);
     }
     for (int i = 0; i < 256; ++i) {
         if (i % 16 == 0) {
-            o << "\n" << decimal_to_hex(i) << ": ";
+            o << "\n" << VM::decimal_to_hex(i) << ": ";
         }
-        o << decimal_to_hex(vm.memory.part[i].get_value()) << " ";
+        o << VM::decimal_to_hex(vm.memory.part[i].get_value()) << " ";
     }
     o << "\n\n";
     o << "Rs:";
     for (auto reg: vm.registers) {
-        o << ' ' << decimal_to_hex(reg.get_value());
+        o << ' ' << VM::decimal_to_hex(reg.get_value());
     }
     o << endl;
     return o;
