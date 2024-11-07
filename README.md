@@ -1,4 +1,3 @@
-![UML class (1)](https://github.com/user-attachments/assets/0004c9bd-668e-4b77-9841-8ae41ef5e889)
 # Vole Machine Simulator
 
 ## Authors
@@ -19,6 +18,7 @@
 A C++ implementation of a Vole Machine simulation. The Vole Machine is a simple virtual machine designed to execute a set of predefined instructions. The Vole Machine simulation includes classes and functions for registers, memory, and the virtual machine itself, along with a user interface for interaction.
 
 ## Table of Contents
+- [UML](https://github.com/user-attachments/assets/0004c9bd-668e-4b77-9841-8ae41ef5e889)
 - [Header File: vole_machine.h](#header-file-vole_machineh)
 - [Source File: vole_machine.cpp](#source-file-vole_machinecpp)
 - [Main File: A1-Task4-S17-20230367_20230631_20230387.cpp](#main-file-A1-Task4-S17-20230367_20230631_20230387cpp)
