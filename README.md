@@ -23,6 +23,9 @@ A C++ implementation of a Vole Machine simulation. The Vole Machine is a simple 
 - [Source File: vole_machine.cpp](#source-file-vole_machinecpp)
 - [Main File: A1-Task4-S17-20230367_20230631_20230387.cpp](#main-file-A1-Task4-S17-20230367_20230631_20230387cpp)
 
+## UML
+![UML image](https://github.com/user-attachments/assets/0004c9bd-668e-4b77-9841-8ae41ef5e889)
+
 ## Header File: vole_machine.h
 This header file defines the classes and functions used in the Vole Machine simulation.
 
