@@ -34,7 +34,7 @@ This header file defines the classes and functions used in the Vole Machine simu
 // Purpose: Simulate Vole Machine with its all commands in cpp
 // Authors: Mahmoud Ibraheem Mohamed Mohamed
 //          Omar Fawzy Abdulhamid Mahmoud
-//          Marwan Mohamed Hassen
+//          Marwan Mohamed Hassan
 // ID: 20230367
 //     20230631
 //     20230387
@@ -168,7 +168,7 @@ This file contains the implementation of the classes and functions defined in th
 // Purpose: Simulate Vole Machine with its all commands in cpp
 // Authors: Mahmoud Ibraheem Mohamed Mohamed
 //          Omar Fawzy Abdulhamid Mahmoud
-//          Marwan Mohamed Hassen
+//          Marwan Mohamed Hassan
 // ID: 20230367
 //     20230631
 //     20230387
@@ -801,7 +801,7 @@ This file contains the main function that initializes the user interface and sta
 // Purpose: Simulate Vole Machine with its all commands in cpp
 // Authors: Mahmoud Ibraheem Mohamed Mohamed
 //          Omar Fawzy Abdulhamid Mahmoud
-//          Marwan Mohamed Hassen
+//          Marwan Mohamed Hassan
 // ID: 20230367
 //     20230631
 //     20230387
