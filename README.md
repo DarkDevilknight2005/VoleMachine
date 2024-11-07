@@ -3,7 +3,7 @@
 ## Authors
 - Mahmoud Ibraheem Mohamed Mohamed
 - Omar Fawzy Abdulhamid Mahmoud
-- Marwan Mohamed Hassen
+- Marwan Mohamed Hassan
 
 ## IDs
 - 20230367
